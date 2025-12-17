@@ -17,6 +17,7 @@ function Añadir(boton){
 
         case 'borrar':
 
+            
 
     }
 }
