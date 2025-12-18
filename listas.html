@@ -1,28 +1,27 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+  </head>
 
+  <body>
     <h1>Lista</h1>
 
-    <input id="tarea" type="text" placeholder="Tarea" > <br>
-    <input id="hora" type="text" placeholder="Hora" size="10"> <br>
+    <input id="tarea" type="text" placeholder="Tarea" /> <br />
+    <input id="hora" type="time" placeholder="Hora" size="10" /> <br />
     
-
     <button name="añadir" onclick="Añadir()">Añadir</button>
-    
 
-    <hr>
+    <hr />
 
-    <div id="container">
-            
-    </div>
-</body>
+    <div id="container"></div>
 
-<script src="lista.js"></script>
+    <h1>Completados</h1>
+    <div id="container2"></div>
 
+  </body>
+
+  <script src="lista.js"></script>
 </html>

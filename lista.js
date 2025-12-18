@@ -1,27 +1,88 @@
-let tareas = [];
-let elementos = 0
-const contenedor = document.getElementById('container')
+let elementos = [];
 
-function Añadir(){
+const contenedor = document.getElementById("container");
+const contenedor2 = document.getElementById("container2");
+
+//Renderiza la lista json
+function Renderizar() {
+  contenedor.innerHTML = "";
+  elementos.forEach((elemento) => {
     
-    tareas.push(document.getElementById('tarea').value)
-    console.log(tareas)
-    
-    contenedor.innerHTML += `
-        <div id="${elementos}">
-        ${document.getElementById('tarea').value} ${document.getElementById('hora').value} <input type="checkbox" name="" id="">
-        <button id="${elementos}" onclick="Eliminar(this)">Eliminiar</button>
-        <br>
-        </div>
+    if(!elemento.check){
+
+            contenedor.innerHTML += `
         
-    `
-    document.getElementById('tarea').value = ''
-    document.getElementById('hora').value = ''
-    elementos++
+            ${elemento.tarea} ${elemento.hora} 
+            <input type="checkbox" name="${elemento.id}" onchange="Completar(this)"> <button type="button" id="${elemento.id}" onclick="Eliminar(this)">🗑️</button> <br><br>
+            <hr>
+        `;
+
+        }
+
+  });
+  console.log(elementos)
+  
 }
 
-function Eliminar(boton){
+Renderizar();
 
-    document.getElementById(`${boton.id}`).remove()
+//Añade una tarea a la lista
+function Añadir() {
+  const tarea = document.getElementById("tarea");
+  const hora = document.getElementById("hora");
+
+  if (
+    tarea.value != null &&
+    tarea.value != "" &&
+    hora.value != null &&
+    hora.value != ""
+  ) {
+    elementos.push({
+      tarea: `${tarea.value}`,
+      hora: `${hora.value}`,
+      id: elementos.length+1,
+      check: false
+    });
+
+    tarea.value = "";
+    hora.value = "";
+    Renderizar();
+  }
+}
+
+//Elimina una tare de la lista
+function Eliminar(boton) {
+  elementos.splice(
+    elementos.findIndex((x) => x.id == boton.id),
+    1,
+  );
+  Renderizar();
+  
+}
+
+function Completar(check){
+
+    const index = elementos.findIndex((x) => x.id == check.name)
+    console.log(index)
+
+    elementos[index].check = true
+
+    contenedor2.innerHTML += ''
+    elementos.forEach((elemento) => {
+
+        if(elemento.check){
+
+            contenedor2.innerHTML += `
+        
+            ${elemento.tarea} ${elemento.hora} 
+            <input type="checkbox" name="${elemento.id}" onchange="Completar(this)"> <button type="button" id="${elemento.id}" onclick="Eliminar(this)">🗑️</button> <br><br>
+            <hr>
+        `;
+
+        }
     
+  });
+
+  Renderizar()
+
 }
