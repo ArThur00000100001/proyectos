@@ -1,23 +1,25 @@
 let tareas = [];
+let elementos = 0
 const contenedor = document.getElementById('container')
 
-function Añadir(boton){
-    switch (boton.name){
-        case 'añadir':
+function Añadir(){
+    
+    tareas.push(document.getElementById('tarea').value)
+    console.log(tareas)
+    
+    contenedor.innerHTML += `
+        <div id="${elementos}">
+        ${document.getElementById('tarea').value} <input type="checkbox" name="" id="">
+        <button id="${elementos}" onclick="Eliminar(this)">Eliminiar</button>
+        <br>
+        </div>
+        
+    `
+    elementos++
+}
 
-            tareas.push(document.getElementById('tarea').value)
-            console.log(tareas)
+function Eliminar(boton){
 
-            contenedor.innerHTML += `
-                ${document.getElementById('tarea').value} <input type="checkbox" name="" id="">
-                <br>
-            `
-
-            break;
-
-        case 'borrar':
-
-            
-
-    }
+    document.getElementById(`${boton.id}`).remove()
+    elementos--
 }
