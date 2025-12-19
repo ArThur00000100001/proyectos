@@ -1,4 +1,29 @@
-let elementos = [];
+let elementos = [
+  {
+    tarea: "Almorzar",
+    hora: "3:30pm",
+    id: 1,
+    check: false
+  },
+  {
+    tarea: "Jugar",
+    hora: "4:30pm",
+    id: 2,
+    check: false
+  },
+  {
+    tarea: "Cenar",
+    hora: "6:30pm",
+    id:3,
+    check: false
+  },
+  {
+    tarea: "Estudiar",
+    hora: "7:30pm",
+    id: 4,
+    check: false
+  }
+];
 
 const contenedor = document.getElementById("container");
 const contenedor2 = document.getElementById("container2");
@@ -6,6 +31,7 @@ const contenedor2 = document.getElementById("container2");
 //Renderiza la lista json
 function Renderizar() {
   contenedor.innerHTML = "";
+  contenedor2.innerHTML = "";
   elementos.forEach((elemento) => {
     
     if(!elemento.check){
@@ -20,6 +46,21 @@ function Renderizar() {
         }
 
   });
+
+  const complete = elementos.filter(m => m.check == true)
+    console.log(complete)
+    complete.forEach(element => {
+
+      contenedor2.innerHTML += `
+      
+        ${element.tarea} ${element.hora} 
+            <input type="checkbox" name="${element.id}" onchange="Completar(this)" checked> <button type="button" id="${element.id}" onclick="Eliminar(this)">🗑️</button> <br><br>
+            <hr>
+
+      `
+
+    })
+
   console.log(elementos)
   
 }
@@ -62,26 +103,19 @@ function Eliminar(boton) {
 
 function Completar(check){
 
-    const index = elementos.findIndex((x) => x.id == check.name)
-    console.log(index)
+    const index = elementos.findIndex(x => x.id == check.name)
 
-    elementos[index].check = true
+    if(elementos[index].check){
+      elementos[index].check = false
+    }else{
+      elementos[index].check = true
+    }
 
-    contenedor2.innerHTML += ''
-    elementos.forEach((elemento) => {
-
-        if(elemento.check){
-
-            contenedor2.innerHTML += `
-        
-            ${elemento.tarea} ${elemento.hora} 
-            <input type="checkbox" name="${elemento.id}" onchange="Completar(this)"> <button type="button" id="${elemento.id}" onclick="Eliminar(this)">🗑️</button> <br><br>
-            <hr>
-        `;
-
-        }
     
-  });
+
+
+    contenedor2.innerHTML = ''
+    
 
   Renderizar()
 
