@@ -3,25 +3,37 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js" integrity="sha512-KZmyTq3PLx9EZl0RHShHQuXtrvdJ+m35tuOiwlcZfs/rE7NZv29ygNA8SFCkMXTnYZQK2OX0Gm2qKGfvWEtRXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="styles.css" />
     <title>Document</title>
   </head>
 
   <body>
-    <h1>Lista</h1>
+    <div ng-app>
+      
+    </div>
 
-    <input id="tarea" type="text" placeholder="Tarea" /> <br />
-    <input id="hora" type="time" placeholder="Hora" size="10" /> <br />
-    
-    <button name="añadir" onclick="Añadir()">Añadir</button>
+    <div class="contenedorPrincipal">
+      <div class="contenedorContenido">
+        <h1>Lista</h1>
+        
+        <form class="input-content">
+          <input id="tarea" type="text" placeholder="Tarea" /> <br />
+          <input id="hora" type="time" placeholder="Hora" size="10" /> <br />
+        </form>
 
-    <hr />
+        <div class="content-botones">
+        <button id="añadir" name="añadir" onclick="Añadir()">Añadir</button>
+        </div>
 
-    <div id="container"></div>
+        <hr />
 
-    <h1>Completados</h1>
-    <div id="container2"></div>
+        <div id="container"></div>
 
+        <h1>Completados</h1>
+        <div id="container2"></div>
+      </div>
+    </div>
   </body>
 
   <script src="lista.js"></script>

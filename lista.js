@@ -3,66 +3,62 @@ let elementos = [
     tarea: "Almorzar",
     hora: "3:30pm",
     id: 1,
-    check: false
+    check: false,
   },
   {
     tarea: "Jugar",
     hora: "4:30pm",
     id: 2,
-    check: false
+    check: false,
   },
   {
     tarea: "Cenar",
     hora: "6:30pm",
-    id:3,
-    check: false
+    id: 3,
+    check: false,
   },
   {
     tarea: "Estudiar",
     hora: "7:30pm",
     id: 4,
-    check: false
-  }
+    check: false,
+  },
 ];
 
 const contenedor = document.getElementById("container");
 const contenedor2 = document.getElementById("container2");
+let edi = '✏️'
 
 //Renderiza la lista json
 function Renderizar() {
   contenedor.innerHTML = "";
   contenedor2.innerHTML = "";
   elementos.forEach((elemento) => {
-    
-    if(!elemento.check){
-
-            contenedor.innerHTML += `
+    if (!elemento.check) {
+      contenedor.innerHTML += `
         
             ${elemento.tarea} ${elemento.hora} 
-            <input type="checkbox" name="${elemento.id}" onchange="Completar(this)"> <button type="button" id="${elemento.id}" onclick="Eliminar(this)">🗑️</button> <br><br>
+            <input type="checkbox" name="${elemento.id}" onchange="Comprobar(this)"> <button type="button" id="${elemento.id}" onclick="Eliminar(this)">🗑️</button> 
+            <button type="button" id="${elemento.id}" onclick="Editar(this)">${edi}</button>
+            <br><br>
             <hr>
         `;
-
-        }
-
+    }
   });
 
-  const complete = elementos.filter(m => m.check == true)
-    console.log(complete)
-    complete.forEach(element => {
-
-      contenedor2.innerHTML += `
+  const complete = elementos.filter((m) => m.check == true);
+  console.log(complete);
+  complete.forEach((element) => {
+    contenedor2.innerHTML += `
       
         ${element.tarea} ${element.hora} 
-            <input type="checkbox" name="${element.id}" onchange="Completar(this)" checked> <button type="button" id="${element.id}" onclick="Eliminar(this)">🗑️</button> <br><br>
+            <input type="checkbox" name="${element.id}" onchange="Comprobar(this)" checked> <button type="button" id="${element.id}" onclick="Eliminar(this)">🗑️</button> <br><br>
             <hr>
 
-      `
+      `;
+  });
 
-    })
-
-  console.log(elementos)
-  
+  console.log(elementos);
 }
 
 Renderizar();
@@ -81,8 +77,8 @@ function Añadir() {
     elementos.push({
       tarea: `${tarea.value}`,
       hora: `${hora.value}`,
-      id: elementos.length+1,
-      check: false
+      id: elementos.length + 1,
+      check: false,
     });
 
     tarea.value = "";
@@ -98,25 +94,20 @@ function Eliminar(boton) {
     1,
   );
   Renderizar();
-  
 }
 
-function Completar(check){
+//Comprueba si la tarea esta marcada o no y la cambia
+function Comprobar(check) {
+  const index = elementos.findIndex((x) => x.id == check.name);
 
-    const index = elementos.findIndex(x => x.id == check.name)
+  if (elementos[index].check) {
+    elementos[index].check = false;
+  } else {
+    elementos[index].check = true;
+  }
 
-    if(elementos[index].check){
-      elementos[index].check = false
-    }else{
-      elementos[index].check = true
-    }
+  contenedor2.innerHTML = "";
 
-    
-
-
-    contenedor2.innerHTML = ''
-    
-
-  Renderizar()
-
+  Renderizar();
 }
+
