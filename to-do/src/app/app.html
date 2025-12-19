@@ -1,0 +1,52 @@
+<router-outlet />
+    <div ng-app>
+      
+    </div>
+
+    <div class="contenedorPrincipal">
+      <div class="contenedorContenido">
+        <h1>Lista</h1>
+        
+        <form class="input-content">
+          <input id="tarea" type="text" placeholder="Tarea" /> <br />
+          <input id="hora" type="time" placeholder="Hora" size="10" /> <br />
+        </form>
+
+        <div class="content-botones">
+        <button id="añadir" name="añadir" onclick="Añadir()">Añadir</button>
+        </div>
+
+        <hr />
+
+        <div id="container">
+          @for (elemento of elementos(); track $index) {
+            @if(!elemento.check){
+
+              {{elemento.tarea}} {{elemento.hora}} 
+              <input type="checkbox" (change)="Comprobar($event.target.checked)"> <button type="button">🗑️</button> 
+              <br><br>
+              <hr>
+
+            }
+          }
+        </div>
+
+        <h1>Completados</h1>
+        <div id="container2">
+
+          @for (elemento of elementos(); track $index) {
+            @if(elemento.check){
+
+              {{elemento.tarea}} {{elemento.hora}} 
+              <input type="checkbox" (change)="Comprobar($event)"> <button type="button">🗑️</button> 
+              <br><br>
+              <hr>
+
+            }
+          }
+
+        </div>
+      </div>
+    </div>
+  
+  <script src="lista.js"></script>
