@@ -1,0 +1,6 @@
+<label>
+    <p>{{item().tarea}} {{item().hora}}</p>
+</label>
+<input class="" type="checkbox" [checked]="item().check" (change)="Comprobar(item())"> 
+<button class="btn btn-dark btn-sm rounded-5" type="button" (click)="Eliminar(item().id)">🗑️</button> 
+<br><br>
