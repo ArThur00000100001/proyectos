@@ -45,16 +45,17 @@ export class App {
   }
 
   //Comprueba si la tarea esta marcada o no y la cambia
-  Comprobar(check: any) {
-    console.log(check)
+  Comprobar(elemento: any) {
+    console.log(elemento)
     
-    /*const index = this.elementos().findIndex((x) => x.id == check.name);
-
-    if (this.elementos()[index].check) {
-      this.elementos()[index].check = false;
-    } else {
-      this.elementos()[index].check = true;
-    }*/
+    this.elementos.update(lista =>
+    lista.map(item =>
+      item.id === elemento.id
+        ? { ...item, check: !item.check }
+        : item
+      )
+    )
+    
   }
 
 }
