@@ -23,7 +23,7 @@
             @if(!elemento.check){
 
               {{elemento.tarea}} {{elemento.hora}} 
-              <input type="checkbox" (change)="Comprobar($event.target.checked)"> <button type="button">🗑️</button> 
+              <input type="checkbox" [checked]="elemento.check" (change)="Comprobar(elemento)"> <button type="button">🗑️</button> 
               <br><br>
               <hr>
 
