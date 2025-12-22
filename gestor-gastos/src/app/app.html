@@ -2,7 +2,7 @@
 
 <div class="container py-4">
   <div class="row">
-    <!-- Resumen de gastos -->
+    
     <div class="col-md-4 mb-4">
       <div class="card h-100 shadow-sm">
         <div class="card-header bg-primary text-white">
@@ -18,7 +18,7 @@
       </div>
     </div>
 
-    <!-- Lista de gastos -->
+    
     <div class="col-md-8 mb-4">
       <div class="card shadow-sm">
         <div class="card-header bg-secondary text-white">
@@ -39,7 +39,7 @@
     </div>
   </div>
 
-  <!-- Formulario para añadir gasto -->
+  
   <div class="row">
     <div class="col-12">
       <div class="card shadow-sm">
@@ -49,7 +49,7 @@
         <div class="card-body">
           <div class="row g-3">
             <div class="col-md-4">
-              <label for="categoria" class="form-label">Categoría</label>
+              <label class="form-label">Categoría</label>
               <select #categoria class="form-select">
                 <option value="">Elige una categoría</option>
                 <option value="comida">Comida</option>
@@ -59,11 +59,11 @@
               </select>
             </div>
             <div class="col-md-4">
-              <label for="nombre" class="form-label">Nombre del gasto</label>
-              <input type="text" #nombre class="form-control" placeholder="Ej. Cena en restaurante">
+              <label class="form-label">Nombre del gasto</label>
+              <input type="text" #nombre class="form-control" placeholder="Nombre del gasto">
             </div>
             <div class="col-md-3">
-              <label for="monto" class="form-label">Monto (S/)</label>
+              <label class="form-label">Monto (S/)</label>
               <input type="text" #monto class="form-control" placeholder="0.00">
             </div>
             <div class="col-md-1 d-flex align-items-end">

@@ -16,32 +16,10 @@ export type Gastos = {
   styleUrl: './app.scss'
 })
 export class App {
-  gastos = signal<Gastos[]>([
-    {
-      nombre: 'Caramelos',
-      monto: 5,
-      categoria: 'gustos',
-      id: 1
-    },
-    {
-      nombre: 'Taxi a la alameda',
-      monto: 6,
-      categoria: 'taxi',
-      id: 2
-    },
-    {
-      nombre: 'Arroz con pollo',
-      monto: 15,
-      categoria: 'comida',
-      id: 3
-    },
-    {
-      nombre: 'Polo',
-      monto: 40,
-      categoria: 'compras',
-      id: 4
-    },
-  ])
+
+  datos:string = localStorage.getItem('gastos') || '[]'
+  gastos = signal<Gastos[]>(JSON.parse(this.datos))
+  
 
   total = computed<number>(() => {
     let t = 0
@@ -86,6 +64,7 @@ export class App {
   Eliminar(id:number){
     const items = this.gastos().filter(x => x.id !== id)
     this.gastos.set([...items])
+    localStorage.setItem('gastos', JSON.stringify(this.gastos()))
   }
 
   Incluir(categoria: string, nombre:string, monto:string){
@@ -105,7 +84,7 @@ export class App {
           id: this.gastos().length + 1
         }
       ])
-
+      localStorage.setItem('gastos', JSON.stringify(this.gastos()))
     }
 
     
