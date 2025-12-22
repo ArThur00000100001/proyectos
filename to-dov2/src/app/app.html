@@ -1,0 +1,86 @@
+<router-outlet />
+
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card shadow-sm border-0 rounded-3">
+        <div class="card-header bg-success text-white text-center">
+          <h2 class="mb-0">📝 Lista de Tareas</h2>
+        </div>
+        <div class="card-body p-4">
+          <!-- Formulario de entrada -->
+          <div class="mb-4">
+            <div class="input-group mb-3">
+              <span class="input-group-text">✏️</span>
+              <input
+                type="text"
+                #tareaInput
+                class="form-control"
+                placeholder="Escribe tu tarea..."
+              />
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text">⏰</span>
+              <input
+                type="time"
+                #horaInput
+                class="form-control"
+              />
+            </div>
+            <div class="d-grid">
+              <button
+                class="btn btn-success btn-lg"
+                (click)="Guardar(tareaInput.value, horaInput.value)"
+              >
+                📤 Agregar Tarea
+              </button>
+            </div>
+          </div>
+
+          <!-- Listas de tareas -->
+          <div class="row">
+            <!-- Tareas pendientes -->
+            <div class="col-md-6">
+              <h4 class="text-primary mb-3">📌 Tareas: {{pendientes()}}</h4>
+              <div class="list-group">
+                @for (elemento of elementos(); track $index) {
+                  @if (!elemento.check) {
+                    <task-view
+                      [item]="elemento"
+                      (borrar)="Borrar($event)"
+                      (check)="Check($event)"
+                      class="list-group-item list-group-item-action"
+                    />
+                  }
+                }
+                @empty {
+                  <small class="text-muted">No hay tareas pendientes.</small>
+                }
+              </div>
+            </div>
+
+            <!-- Tareas completadas -->
+            <div class="col-md-6">
+              <h4 class="text-success mb-3">✅ Completadas: {{completadas()}}</h4>
+              <div class="list-group">
+                @for (elemento of elementos(); track $index) {
+                  @if (elemento.check) {
+                    <task-view
+                      [item]="elemento"
+                      (borrar)="Borrar($event)"
+                      (check)="Check($event)"
+                      class="list-group-item list-group-item-action bg-light"
+                    />
+                  }
+                }
+                @empty {
+                  <small class="text-muted">No hay tareas completadas.</small>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>  

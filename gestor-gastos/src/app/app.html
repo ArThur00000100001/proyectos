@@ -1,0 +1,79 @@
+<router-outlet />
+
+<div class="container py-4">
+  <div class="row">
+    <!-- Resumen de gastos -->
+    <div class="col-md-4 mb-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0">Resumen de Gastos</h5>
+        </div>
+        <div class="card-body">
+          <p class="mb-1"><strong>Total Gastado:</strong> {{ total() }}</p>
+          <p class="mb-1"><strong>Comida:</strong> {{ comida() }}</p>
+          <p class="mb-1"><strong>Taxi:</strong> {{ taxi() }}</p>
+          <p class="mb-1"><strong>Compras:</strong> {{ compras() }}</p>
+          <p class="mb-0"><strong>Gustos:</strong> {{ gustos() }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lista de gastos -->
+    <div class="col-md-8 mb-4">
+      <div class="card shadow-sm">
+        <div class="card-header bg-secondary text-white">
+          <h5 class="mb-0">Mis Gastos</h5>
+        </div>
+        <div class="card-body p-0">
+          @if (gastos().length === 0) {
+            <div class="text-center py-3 text-muted">No hay gastos registrados.</div>
+          } @else {
+            @for (item of gastos(); track $index) {
+              <div class="border-bottom p-3">
+                <gastos-view [item]="item" (eliminar)="Eliminar($event)" />
+              </div>
+            }
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Formulario para añadir gasto -->
+  <div class="row">
+    <div class="col-12">
+      <div class="card shadow-sm">
+        <div class="card-header bg-success text-white">
+          <h5 class="mb-0">Añadir Nuevo Gasto</h5>
+        </div>
+        <div class="card-body">
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label for="categoria" class="form-label">Categoría</label>
+              <select #categoria class="form-select">
+                <option value="">Elige una categoría</option>
+                <option value="comida">Comida</option>
+                <option value="taxi">Taxi</option>
+                <option value="compras">Compras</option>
+                <option value="gustos">Gustos</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label for="nombre" class="form-label">Nombre del gasto</label>
+              <input type="text" #nombre class="form-control" placeholder="Ej. Cena en restaurante">
+            </div>
+            <div class="col-md-3">
+              <label for="monto" class="form-label">Monto (S/)</label>
+              <input type="text" #monto class="form-control" placeholder="0.00">
+            </div>
+            <div class="col-md-1 d-flex align-items-end">
+              <button class="btn btn-primary w-100" (click)="Incluir(categoria.value, nombre.value, monto.value)">
+                Añadir
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

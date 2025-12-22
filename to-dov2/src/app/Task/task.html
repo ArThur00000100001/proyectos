@@ -1,0 +1,6 @@
+<label>
+    {{item().tarea}} - {{item().hora}}
+</label>
+    <input type="checkbox" [checked]="item().check" (change)="Check(item())">
+    <button class="boton-delete btn-dark color-ligth" (click)="Borrar(item().id)">🗑️</button>
+    <br><br>
